@@ -11,9 +11,23 @@ import pandas as pd  # 导入pandas
 import matplotlib.pyplot as plt  # 导入图形展示库
 
 # 数据准备
-raw_data = np.loadtxt('regression.txt')  # 读取数据文件
-X = raw_data[:, :-1]  # 分割自变量
-y = raw_data[:, -1]  # 分割因变量
+#raw_data = np.loadtxt('regression.txt')  # 读取数据文件
+raw_data = pd.read_excel("s.xls")
+new_raw_data = pd.DataFrame()
+new_raw_data["x1"] = raw_data["bed"]
+new_raw_data["x2"] = raw_data["living"]
+new_raw_data["x3"] = raw_data["yangtai"]
+new_raw_data["x4"] = raw_data["door B"]
+new_raw_data["x5"] = raw_data["door C"]
+new_raw_data["x6"] = raw_data["door D"]
+print(raw_data.columns)
+print(new_raw_data.columns)
+#print(raw_data["bed"])
+
+#X = raw_data[:, :-1]  # 分割自变量
+#y = raw_data[:, -1]  # 分割因变量
+X = new_raw_data
+y = raw_data["occpuancy"]
 # 训练回归模型
 n_folds = 6  # 设置交叉检验的次数
 model_br = BayesianRidge()  # 建立贝叶斯岭回归模型对象
